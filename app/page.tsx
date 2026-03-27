@@ -1,8 +1,8 @@
 import { cookies } from "next/headers"
-import { Card, CardContent } from "@/components/ui/card"
 import { UrlManager } from "@/components/url-manager"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { InfoBox } from "@/components/info-box"
+import { EmbeddedViewer } from "@/components/embedded-viewer"
 
 export default async function Home() {
   // Get the URL from cookies
@@ -25,27 +25,8 @@ export default async function Home() {
         <UrlManager savedUrl={savedUrl} />
       </div>
 
-      {/* Iframe Card - Fills the card completely */}
-      <div className="max-w-4xl mx-auto">
-        <Card className="overflow-hidden">
-          <CardContent className="p-0">
-            {savedUrl ? (
-              <iframe
-                src={savedUrl}
-                className="w-full h-[600px] border-0"
-                sandbox="allow-popups allow-top-navigation allow-scripts allow-forms allow-storage-access-by-user-activation allow-same-origin"
-                title="URL Viewer"
-              />
-            ) : (
-              <div className="w-full h-[600px] flex items-center justify-center bg-muted text-muted-foreground">
-                <div className="text-center space-y-2">
-                  <div className="text-xl font-medium">No URL set</div>
-                  <div className="text-sm">Enter a URL above to display content here</div>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
+      <div className="max-w-4xl mx-auto space-y-4">
+        <EmbeddedViewer savedUrl={savedUrl} />
       </div>
     </div>
   )
